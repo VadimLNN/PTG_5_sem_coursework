@@ -508,7 +508,7 @@ MonoBehaviour:
   agent: {fileID: 59004196170200668, guid: aebcd0c3b3523024fb4d3375186a0f0d, type: 3}
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   isOnAssignment: 0
 --- !u!114 &1511549892759960712
 MonoBehaviour:
