@@ -349,7 +349,7 @@ MonoBehaviour:
   damage: 25
   targetLayer:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 0
 --- !u!114 &4474481000475856221
 MonoBehaviour:
   m_ObjectHideFlags: 0
