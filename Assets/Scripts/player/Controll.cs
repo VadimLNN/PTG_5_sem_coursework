@@ -268,8 +268,8 @@ public class Controll : MonoBehaviour
 
         if (cols.Length > 0)
         {
-            EnemyScr c = cols[0].transform.GetComponent<EnemyScr>();
-            if (c != null) c.takeDamage(20);
+            //EnemyScr c = cols[0].transform.GetComponent<EnemyScr>();
+            //if (c != null) c.takeDamage(20);
 
             GoatSheepControllerScr c2 = cols[0].transform.GetComponent<GoatSheepControllerScr>();
             if (c2 != null) c2.takeDamage(20);
