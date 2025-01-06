@@ -33,6 +33,8 @@ public class MinionScr : MonoBehaviour
 
     Rigidbody rb;
 
+    Transform targetEnemy = null;
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -66,25 +68,26 @@ public class MinionScr : MonoBehaviour
         else
             state = 1;
 
-
-        // отслеживание врага
-        Collider[] cols = Physics.OverlapSphere(transform.position, detectRadius, enemyLayer);
-
-        // если враг в радиусе 
-        if (cols.Length > 0 && isOnAssignment == true)
+        if (isOnAssignment == true)
         {
-            isFighting = true;
-            if (Vector3.Distance(transform.position, cols[0].transform.position) <= atkRadius)
-            {
-                state = 2;
-                agent.SetDestination(transform.position);
-            }
+            Collider[] cols = Physics.OverlapSphere(transform.position, detectRadius, enemyLayer);
+            if (cols.Length > 0 && targetEnemy == null)
+                targetEnemy = cols[0].transform;
             else
-                agent.SetDestination(cols[0].transform.position);
-        }
-        else
-            isFighting = false;
+            {
+                if (targetEnemy == null)
+                    return;
 
+                if (Vector3.Distance(transform.position, targetEnemy.position) <= atkRadius)
+                {
+                    state = 2;
+                    agent.SetDestination(transform.position);
+                }
+                else
+                    agent.SetDestination(targetEnemy.position);
+            }
+
+        }
 
         // установка анимации
         anim.SetInteger("state", state);
@@ -93,25 +96,19 @@ public class MinionScr : MonoBehaviour
     
     public void FollowOrder(Vector3 point) 
     {
-        if (isDead == false)
-        {
-            assignmentPnt = point;
+        assignmentPnt = point;
         
-            // пробежка до задания и установка состояния 
-            agent.SetDestination(point);
-            isOnAssignment = true;
-        }
+        // пробежка до задания и установка состояния 
+        agent.SetDestination(point);
+        isOnAssignment = true;
     }
     public void FollowMaster(Vector3 point)
     {
-        if (isDead == false)
-        {
-            assignmentPnt = point;
-            // преследование мастера
-            agent.SetDestination(point);
-            isOnAssignment = false;
-            isFighting = false;
-        }
+        assignmentPnt = point;
+        // преследование мастера
+        agent.SetDestination(point);
+        isOnAssignment = false;
+        isFighting = false;
     }
 
     public bool GetIsOnAssignment()
@@ -148,7 +145,7 @@ public class MinionScr : MonoBehaviour
     }
     IEnumerator despawn()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(3);
 
         Destroy(gameObject);
     }
