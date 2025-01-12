@@ -126,7 +126,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4574192825567932450, guid: 88716498407968c4abc511b0e063fb77, type: 3}
       propertyPath: m_Name
-      value: Mushroom Variant
+      value: Mushroom
       objectReference: {fileID: 0}
     - target: {fileID: 4574192825567932450, guid: 88716498407968c4abc511b0e063fb77, type: 3}
       propertyPath: m_Layer
@@ -269,7 +269,19 @@ MonoBehaviour:
       m_Calls: []
   spawnOnDeath:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onDeath:
     m_PersistentCalls:
       m_Calls:
@@ -309,7 +321,7 @@ MonoBehaviour:
   damage: 4
   targetLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 768
 --- !u!114 &-7761606737520229974
 MonoBehaviour:
   m_ObjectHideFlags: 0
