@@ -46,7 +46,7 @@ public class EnemySpawner : MonoBehaviour
         enemy.Target = player;
 
         Health enemyHP = enemy.EnemyHP;
-        enemyHP.spawnOnDeath.AddListener(transform.GetComponent<ItemSpawner>().spawnRandomItem);
+        enemyHP.spawnOnDeath.AddListener(transform.GetComponent<ItemSpawner>().spawnItem);
 
     }
 

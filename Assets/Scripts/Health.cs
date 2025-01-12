@@ -12,7 +12,7 @@ public class Health : MonoBehaviour
 
     public UnityEvent<int, int> onHealthChange;
 
-    public UnityEvent <Vector3> spawnOnDeath;
+    public UnityEvent <Vector3, string> spawnOnDeath;
     public UnityEvent onDeath;
     public UnityEvent onHitTaken;
 
@@ -47,15 +47,32 @@ public class Health : MonoBehaviour
         if(currentHealth < 0)
             currentHealth = 0;
 
-
-
         onHealthChange?.Invoke((int)currentHealth, maxHealth);
 
         if (currentHealth <= 0)
         {
             onDeath?.Invoke();
             
-            spawnOnDeath?.Invoke(transform.position);
+            string typeOfItem = "soul";
+
+            if (Random.Range(0,10) > 2)
+                switch (transform.name)
+                {
+                    case "Bat(Clone)":
+                        typeOfItem = "wings";
+                        break;
+                    case "Golem(Clone)":
+                        typeOfItem = "cristal";
+                        break;
+                    case "Mushroom(Clone)":
+                        typeOfItem = "mushroom";
+                        break;
+                    default:
+                        typeOfItem = "soul";
+                        break;
+                }
+
+            spawnOnDeath?.Invoke(transform.position, typeOfItem);
         }
     }
 }
