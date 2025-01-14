@@ -29,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
     // Jump
     [Range(3f, 15f)]
     public float jumpForce = 5f;
+    [Range(0.1f, 10f)]
+    public float distToGrnd = 2;
 
     bool onGround = true;
     
@@ -111,9 +113,9 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleJump()
     {
-        onGround = Physics.Raycast(transform.position, Vector3.down, 1.5f);
+        onGround = Physics.Raycast(transform.position, Vector3.down, distToGrnd);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && onGround)
         {
             pa.jump();
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, rb.linearVelocity.z);
@@ -207,5 +209,10 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(4);
 
         Destroy(gameObject);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y - distToGrnd, transform.position.z));
     }
 }
