@@ -104,9 +104,9 @@ public class PlayerMovement : MonoBehaviour
 
         V = transform.TransformDirection(V);
 
-        V.y = rb.velocity.y;
+        V.y = rb.linearVelocity.y;
 
-        rb.velocity = V;
+        rb.linearVelocity = V;
     }
 
     void HandleJump()
@@ -116,7 +116,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             pa.jump();
-            rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, rb.linearVelocity.z);
         }
 
         pa.setOnGround(onGround);
@@ -160,9 +160,9 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleInteract()
     {
-        // проверка объекта для интеракции в радиусе
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         Collider[] cols = Physics.OverlapSphere(transform.position, detectRadius, interactable);
-        // если объект попал в радиус
+        // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         if (cols.Length > 0 && Input.GetKey(KeyCode.F))
         {
             pa.interact();
