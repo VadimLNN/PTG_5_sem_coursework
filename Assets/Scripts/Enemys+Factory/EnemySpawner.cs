@@ -15,6 +15,8 @@ public class EnemySpawner : MonoBehaviour
     public float spawnIntervalMax = 10f;
     public float spawnIntervalMin = 1.5f;
 
+    public bool spawningEveryWhere = false;
+
     private void Start() 
     {
         float probabilitySum = 0;
@@ -57,16 +59,39 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemy()
     {
-        spawnRandomEnemy();
+        if (spawningEveryWhere)
+        {
+            spawnRandomEnemy();
 
-        spawnIntervalMax = Mathf.Max(1f, spawnIntervalMax - 0.05f);
-        CancelInvoke(nameof(SpawnEnemy));
-        InvokeRepeating(nameof(SpawnEnemy), spawnIntervalMin, spawnIntervalMax);
+            spawnIntervalMax = Mathf.Max(1f, spawnIntervalMax - 0.05f);
+            CancelInvoke(nameof(SpawnEnemy));
+            InvokeRepeating(nameof(SpawnEnemy), spawnIntervalMin, spawnIntervalMax);
+        }
     }
 
     public List<EnemyFactory> getFactories()
     {
         return enemyFactories;
+    }
+
+    public void spawnRandomEnemy(Transform enemysCrowd, int distX, int sidtZ)
+    {
+        enemyFactory = enemyFactories[Random.Range(0, enemyFactories.Count)];
+        IEnemy enemy = enemyFactory.getEnemy(enemysCrowd);
+
+
+        Vector3 spawnZoneCenter = enemysCrowd.transform.position;
+
+        Vector3 spawnPos = new Vector3(Random.Range(spawnZoneCenter.x - distX, spawnZoneCenter.x + distX),
+                                        spawnZoneCenter.y,
+                                        Random.Range(spawnZoneCenter.z - sidtZ, spawnZoneCenter.z + sidtZ));
+
+        enemy.positionAndRotation(spawnPos, Quaternion.identity);
+        
+        enemy.Target = player;
+
+        Health enemyHP = enemy.EnemyHP;
+        enemyHP.spawnOnDeath.AddListener(transform.GetComponent<ItemSpawner>().spawnItem);
     }
 }
 
