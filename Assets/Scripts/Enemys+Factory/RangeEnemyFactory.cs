@@ -12,4 +12,10 @@ public class RangeEnemyFactory : EnemyFactory
 
         return rangeEnemy.GetComponent<RangeEnemy>();
     }
+    public override IEnemy getEnemy(Transform crowd)
+    {
+        GameObject rangeEnemy = Instantiate(rangeEnemyPrefab, crowd);
+
+        return rangeEnemy.GetComponent<RangeEnemy>();
+    }
 }

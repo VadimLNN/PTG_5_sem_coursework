@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] List<EnemyProbability> enemyFactoriesWithProbs = new List<EnemyProbability>();
-    List<EnemyFactory> enemyFactories = new List<EnemyFactory>();
+    [SerializeField] 
+    List<EnemyProbability> enemyFactoriesWithProbs = new List<EnemyProbability>();
+
+    public List<EnemyFactory> enemyFactories = new List<EnemyFactory>();
 
     EnemyFactory enemyFactory;
     public Transform player;
@@ -29,6 +31,10 @@ public class EnemySpawner : MonoBehaviour
 
         InvokeRepeating(nameof(SpawnEnemy), spawnIntervalMin, Random.Range(spawnIntervalMin, spawnIntervalMax));
     }
+    void Update()
+    {
+        
+    }
 
     public void spawnRandomEnemy()
     {
@@ -41,19 +47,12 @@ public class EnemySpawner : MonoBehaviour
         Vector3 position = transform.position + direction;
         
         enemy.positionAndRotation(position, Quaternion.identity);
-
         
         enemy.Target = player;
 
         Health enemyHP = enemy.EnemyHP;
         enemyHP.spawnOnDeath.AddListener(transform.GetComponent<ItemSpawner>().spawnItem);
 
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Tab))
-            spawnRandomEnemy();
     }
 
     void SpawnEnemy()
@@ -64,4 +63,11 @@ public class EnemySpawner : MonoBehaviour
         CancelInvoke(nameof(SpawnEnemy));
         InvokeRepeating(nameof(SpawnEnemy), spawnIntervalMin, spawnIntervalMax);
     }
+
+    public List<EnemyFactory> getFactories()
+    {
+        return enemyFactories;
+    }
 }
+
+
