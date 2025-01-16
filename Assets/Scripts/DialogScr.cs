@@ -33,8 +33,6 @@ public class DialogScr : InteractableObj
             dlgTxt.text = "Молодец. Сварю из этого что-нить балдёжное, зайди позже.";
         else if (finalQuests != qm.quests.Count && qm.questListUI.childCount != 0)
             dlgTxt.text = "Ещё не всё собрал. Собирай дальше.";
-
-        closePanel();
     }
     public void closePanel()
     {
@@ -45,7 +43,7 @@ public class DialogScr : InteractableObj
 
     public void quests()
     {
-        qm.showQuests();
         closePanel();
+        qm.showQuests();
     }
 }
