@@ -23,6 +23,18 @@ public class DialogScr : InteractableObj
         anim.SetInteger("state", 1);
         panel.SetActive(true); 
         Cursor.lockState = CursorLockMode.None;
+
+        int finalQuests = 0;
+        foreach (Quest q in qm.quests)
+            if (q.currentAmount == q.targetAmount)
+                finalQuests++;
+
+        if (finalQuests == qm.quests.Count)
+            dlgTxt.text = "Молодец. Сварю из этого что-нить балдёжное, зайди позже.";
+        else if (finalQuests != qm.quests.Count && qm.questListUI.childCount != 0)
+            dlgTxt.text = "Ещё не всё собрал. Собирай дальше.";
+
+        closePanel();
     }
     public void closePanel()
     {
@@ -34,5 +46,6 @@ public class DialogScr : InteractableObj
     public void quests()
     {
         qm.showQuests();
+        closePanel();
     }
 }

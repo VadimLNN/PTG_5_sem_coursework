@@ -10,7 +10,7 @@ public class CameraLookingScr : MonoBehaviour
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
         character = this.transform.parent.gameObject;
     }
 
@@ -29,4 +29,6 @@ public class CameraLookingScr : MonoBehaviour
         character.transform.localRotation = Quaternion.AngleAxis(mouseLook.x, character.transform.up);
 
     }
+
+    
 }
