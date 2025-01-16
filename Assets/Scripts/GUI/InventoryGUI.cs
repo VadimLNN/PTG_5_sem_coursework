@@ -30,7 +30,7 @@ public class InventoryGUI : MonoBehaviour
 
     void Start() 
     {
-        listToDictionary(); 
+        listToDictionary();
         updateGUI();
     }
 

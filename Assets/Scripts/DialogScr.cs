@@ -1,9 +1,16 @@
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class DialogScr : InteractableObj
 {
     public GameObject panel;
     Animator anim;
+
+    public Text dlgTxt;
+
+    public QuestManager qm;
 
     void Start()
     {
@@ -15,7 +22,7 @@ public class DialogScr : InteractableObj
     {
         anim.SetInteger("state", 1);
         panel.SetActive(true); 
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.None;
     }
     public void closePanel()
     {
@@ -24,5 +31,8 @@ public class DialogScr : InteractableObj
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-
+    public void quests()
+    {
+        qm.showQuests();
+    }
 }

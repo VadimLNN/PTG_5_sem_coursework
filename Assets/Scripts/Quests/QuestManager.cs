@@ -15,7 +15,7 @@ public class QuestManager : MonoBehaviour
     {
         ResetProgress();
         //LoadProgress();
-        UpdateQuestUI();
+        //UpdateQuestUI();
     }
 
     public void UpdateQuest(Quest quest, int amount)
@@ -37,6 +37,17 @@ public class QuestManager : MonoBehaviour
                 UpdateQuest(quest, points);
             }
         }
+    }
+
+    public void AddNewQuest(string qName, string descr, int targetAmount, int currentAmount)
+    {
+        Quest newQuest = new Quest(qName, descr, targetAmount, 0);
+        quests.Add(newQuest);
+    }
+
+    public void showQuests()
+    {
+        UpdateQuestUI();
     }
 
     private void UpdateQuestUI()
