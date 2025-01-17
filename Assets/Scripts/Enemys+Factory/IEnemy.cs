@@ -13,4 +13,5 @@ public interface IEnemy
     public void stunEnd();
     public void stop(bool state);
     public void positionAndRotation(Vector3 spawnPosition, Quaternion spawnRotation);
+    public void setParent(Transform parent);
 }

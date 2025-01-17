@@ -86,6 +86,10 @@ public abstract class AbstractEnemy : MonoBehaviour, IEnemy
         transform.position = spawnPosition;
         transform.rotation = spawnRotation;
     }
+    public void setParent(Transform parent)
+    {
+        transform.parent = parent;
+    }
     public virtual void death()
     {
         dead = true;

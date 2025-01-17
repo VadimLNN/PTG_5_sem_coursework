@@ -77,8 +77,7 @@ public class EnemySpawner : MonoBehaviour
     public void spawnRandomEnemy(Transform enemysCrowd, int distX, int sidtZ)
     {
         enemyFactory = enemyFactories[Random.Range(0, enemyFactories.Count)];
-        IEnemy enemy = enemyFactory.getEnemy(enemysCrowd);
-
+        IEnemy enemy = enemyFactory.getEnemy();
 
         Vector3 spawnZoneCenter = enemysCrowd.transform.position;
 
@@ -87,7 +86,9 @@ public class EnemySpawner : MonoBehaviour
                                         Random.Range(spawnZoneCenter.z - sidtZ, spawnZoneCenter.z + sidtZ));
 
         enemy.positionAndRotation(spawnPos, Quaternion.identity);
-        
+
+        enemy.setParent(enemysCrowd);
+
         enemy.Target = player;
 
         Health enemyHP = enemy.EnemyHP;
