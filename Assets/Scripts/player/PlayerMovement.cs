@@ -113,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleJump()
     {
-        onGround = Physics.Raycast(transform.position, Vector3.down, distToGrnd);
+        onGround = Physics.Raycast(transform.position+Vector3.up, Vector3.down, distToGrnd);
 
         if (Input.GetKeyDown(KeyCode.Space) && onGround)
         {

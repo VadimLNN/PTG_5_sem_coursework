@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class DialogScr : InteractableObj
@@ -30,9 +28,9 @@ public class DialogScr : InteractableObj
                 finalQuests++;
 
         if (finalQuests == qm.quests.Count)
-            dlgTxt.text = "Молодец. Сварю из этого что-нить балдёжное, зайди позже.";
+            dlgTxt.text = "Good for you. I'll make something bald, come back later.";
         else if (finalQuests != qm.quests.Count && qm.questListUI.childCount != 0)
-            dlgTxt.text = "Ещё не всё собрал. Собирай дальше.";
+            dlgTxt.text = "You haven't gotten it all together yet. Keep collecting.";
     }
     public void closePanel()
     {
