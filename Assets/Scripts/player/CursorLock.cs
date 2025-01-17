@@ -6,30 +6,28 @@ public class CursorLock : MonoBehaviour
 {
     public bool cursorLock = true;
 
-    void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        cursorLock = true;
-    }
+    void Start() => lockCursor();
 
     void Update()
     {
-        if (cursorLock)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+        if (Input.GetKeyDown(KeyCode.Escape))
+            if (cursorLock)
+                lockCursor();
+            else
+                unlockCursor();
+    }
 
-            if(Input.GetKeyDown(KeyCode.Escape))
-                cursorLock = false;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+    public void unlockCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        cursorLock = true;
+    }
 
-            if (Input.GetKeyDown(KeyCode.Escape))
-                cursorLock = true;
-        }
+    public void lockCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        cursorLock = false;
     }
 }
