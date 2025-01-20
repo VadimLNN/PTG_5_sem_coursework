@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
     public float distToGrnd = 2;
 
     bool onGround = true;
-    
+
     // Attack
     public LayerMask enemyLayer;
     float atkRadius = 1.5f;
@@ -50,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
     // Interactions
     public LayerMask interactable;
     float detectRadius = 1.5f;
+    bool interacting = false;
 
     bool dead = false;
 
@@ -67,10 +68,19 @@ public class PlayerMovement : MonoBehaviour
         if (dead) return;
 
         HandleJump();
+        
         HandleAttack();
-        HandleOrders();
-        HandleInteract();
-        HandleMovement();
+        if (attacking == false)
+        {
+            HandleOrders();
+            if (ordering == false)
+            {
+                HandleInteract();
+
+                if (interacting == false)
+                    HandleMovement();
+            }
+        }
     }
 
     void HandleMovement()
@@ -113,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleJump()
     {
-        onGround = Physics.Raycast(transform.position+Vector3.up, Vector3.down, distToGrnd);
+        onGround = Physics.Raycast(transform.position + Vector3.up, Vector3.down, distToGrnd);
 
         if (Input.GetKeyDown(KeyCode.Space) && onGround)
         {
@@ -162,18 +172,24 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleInteract()
     {
+        
         // �������� ������� ��� ���������� � �������
         Collider[] cols = Physics.OverlapSphere(transform.position, detectRadius, interactable);
         // ���� ������ ����� � ������
         if (cols.Length > 0 && Input.GetKey(KeyCode.F))
         {
+            interacting = true;
             pa.interact();
             InteractableObj c = cols[0].transform.GetComponent<InteractableObj>();
             if (c != null)
                 c.interact();
         }
     }
-    void stopInteraction() => pa.stopInteraction();
+    void stopInteraction()
+    {
+        pa.stopInteraction();
+        interacting = false;
+    }
 
     void HandleAttack()
     {
@@ -194,7 +210,11 @@ public class PlayerMovement : MonoBehaviour
                 targetHP.hpDecrease(100);
         }
     }
-    void stopAttack() => pa.stopAttack();
+    void stopAttack()
+    {
+        pa.stopAttack();
+        attacking = false;
+    }
 
 
     public void death()
