@@ -108,8 +108,8 @@ GameObject:
   - component: {fileID: 4365239983870738852}
   - component: {fileID: 1510850781859449296}
   - component: {fileID: 2217145621746986991}
-  - component: {fileID: 514383461061130293}
   - component: {fileID: 4150140753005692876}
+  - component: {fileID: 514383461061130293}
   m_Layer: 6
   m_Name: AltarMinion
   m_TagString: Untagged
@@ -187,21 +187,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &514383461061130293
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8001709054979339563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24b9ca5c344150043abbc781e30457ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Minions: {fileID: 0}
-  minion: {fileID: 8750017221117171629, guid: 6e944629f8c119047a646ec2d13daaac, type: 3}
-  inv: {fileID: 2937363430853162659, guid: b17cd550f2d0e7d4ba9fed8967e369f3, type: 3}
 --- !u!136 &4150140753005692876
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -225,3 +210,18 @@ CapsuleCollider:
   m_Height: 7.153821
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 3.41}
+--- !u!114 &514383461061130293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8001709054979339563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24b9ca5c344150043abbc781e30457ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Minions: {fileID: 0}
+  minion: {fileID: 8750017221117171629, guid: 6e944629f8c119047a646ec2d13daaac, type: 3}
+  inv: {fileID: 2937363430853162659, guid: b17cd550f2d0e7d4ba9fed8967e369f3, type: 3}
