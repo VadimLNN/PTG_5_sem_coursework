@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class SpawnerMinonScr : InteractableObj
 {
@@ -13,6 +14,9 @@ public class SpawnerMinonScr : InteractableObj
 
     public Inventory inv;
 
+    public UnityEvent playsound;
+
+
     public override void interact()
     {
         SpawnMinion();
@@ -25,6 +29,7 @@ public class SpawnerMinonScr : InteractableObj
             nextSpawn = Time.time + 1 / spawnRate;
             Instantiate(minion, transform.position, Quaternion.identity, Minions.gameObject.transform);
             inv.getItem(ItemTypes.Soul);
+            playsound.Invoke();
         }
     }
 }
