@@ -143,7 +143,15 @@ namespace SlimUI.ModernMenu{
 			}
 		}
 
-		public void  DisablePlayCampaign(){
+        public void LoadSceneSimple(string scene)
+        {
+            if (scene != "")
+            {
+                SceneManager.LoadScene(scene);
+            }
+        }
+
+        public void  DisablePlayCampaign(){
 			playMenu.SetActive(false);
 		}
 
