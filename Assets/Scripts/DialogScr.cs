@@ -19,8 +19,12 @@ public class DialogScr : InteractableObj
     public override void interact()
     {
         anim.SetInteger("state", 1);
-        panel.SetActive(true); 
-        Cursor.lockState = CursorLockMode.None;
+        panel.SetActive(true);
+
+        GameObject gameManager = GameObject.FindWithTag("GameManager");
+        if (gameManager != null)
+            gameManager.GetComponent<CursorLock>().unlockCursor();
+
 
         int finalQuests = 0;
         foreach (Quest q in qm.quests)
@@ -36,7 +40,10 @@ public class DialogScr : InteractableObj
     {
         panel.SetActive(false);
         anim.SetInteger("state", 0);
-        Cursor.lockState = CursorLockMode.Locked;
+
+        GameObject gameManager = GameObject.FindWithTag("GameManager");
+        if (gameManager != null)
+            gameManager.GetComponent<CursorLock>().lockCursor();
     }
 
     public void quests()
