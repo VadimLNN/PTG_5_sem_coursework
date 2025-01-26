@@ -10,11 +10,11 @@ public class CursorLock : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-            if (cursorLock)
-                lockCursor();
-            else
-                unlockCursor();
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //    if (cursorLock)
+        //        lockCursor();
+        //    else
+        //        unlockCursor();
     }
 
     public void unlockCursor()
