@@ -10,16 +10,32 @@ public class DialogScr : InteractableObj
 
     public QuestManager qm;
 
+    bool panelOpen = false;
+    bool showQuests = true;
+
     void Start()
     {
         anim = GetComponent<Animator>();
         panel.SetActive(false);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F) && panelOpen)
+        {
+            if (showQuests)
+            {
+                quests();
+                showQuests = false;
+            }
+            closePanel();
+        }
+    }
     public override void interact()
     {
         anim.SetInteger("state", 1);
         panel.SetActive(true);
+        panelOpen = true;
 
         GameObject gameManager = GameObject.FindWithTag("GameManager");
         if (gameManager != null)
@@ -39,6 +55,7 @@ public class DialogScr : InteractableObj
     public void closePanel()
     {
         panel.SetActive(false);
+        panelOpen = false;
         anim.SetInteger("state", 0);
 
         GameObject gameManager = GameObject.FindWithTag("GameManager");

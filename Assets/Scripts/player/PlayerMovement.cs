@@ -74,13 +74,10 @@ public class PlayerMovement : MonoBehaviour
         if (attacking == false)
         {
             HandleOrders();
-            if (ordering == false)
-            {
-                HandleInteract();
+            HandleInteract();
 
-                if (interacting == false)
-                    HandleMovement();
-            }
+            if (interacting == false)
+                HandleMovement();
         }
     }
 
@@ -144,7 +141,6 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKey(KeyCode.E))
             {
                 pa.setOrder(1);
-                ordering = true;
 
                 if (Time.time >= nextSend)
                 {
@@ -156,7 +152,6 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKey(KeyCode.Q))
             {
                 pa.setOrder(2);
-                ordering = true;
 
                 if (Time.time >= nextSendBack)
                 {
