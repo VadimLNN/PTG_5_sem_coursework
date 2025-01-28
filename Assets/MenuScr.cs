@@ -12,7 +12,10 @@ public class MenuScr : MonoBehaviour
             transform.GetComponent<CursorLock>().unlockCursor();
         }
     }
-
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
     public void CloseMenu()
     {
         menu.SetActive(false);

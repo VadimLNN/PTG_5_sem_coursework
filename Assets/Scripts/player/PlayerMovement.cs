@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -229,6 +230,7 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(4);
 
         Destroy(gameObject);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void OnDrawGizmos()
