@@ -1,0 +1,8 @@
+<messages uid="2">
+  <message uid="1">
+    <text>Хммм… Подпись… есть. Печать… вроде была. Запах навоза — всё по ГОСТу. Проходи. Но помни — назад ты уже не выйдешь тем же, кем вошёл. Добро пожаловать в Город.</text>
+    <answers>
+      <answer auid="2" uid="-1" action="dialogue end">ништяк</answer>
+    </answers>
+  </message>
+</messages>
