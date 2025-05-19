@@ -4,25 +4,48 @@ public class NPCScript : MonoBehaviour
 {
     public TextAsset currentDialogue;
     public TextAsset nextDialog;
-    public GameObject door;
     public GameObject dialogueSystem;
+    public Animator animator;
+
+    public float interactionDistance = 3f;
+    public KeyCode interactKey = KeyCode.F;
+
+    private GameObject player;
+    private NPCScript npc;
+
+    bool isOpen = false;
+
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+        npc = GetComponent<NPCScript>();
+    }
+
+    void Update()
+    {
+        if (player == null || npc == null) return;
+
+        float dist = Vector3.Distance(transform.position, player.transform.position);
+
+        if (dist <= interactionDistance && Input.GetKeyDown(interactKey))
+        {
+            interact();
+        }
+    }
 
     public void interact()
     {
-        dialogueSystem.GetComponent<DialogueSystem>().loadDialogue(currentDialogue);
-        dialogueSystem.GetComponent<DialogueSystem>().setAction("door open", openDoor);
-        dialogueSystem.GetComponent<DialogueSystem>().setAction("dialogue change", changeDlg);
-        dialogueSystem.GetComponent<DialogueSystem>().setAction("make smarter", makeSmarter);
-        dialogueSystem.GetComponent<DialogueSystem>().setAction("make stronger", makeStronger);
-        dialogueSystem.GetComponent<DialogueSystem>().setAction("door strong open", kickIn);
-        dialogueSystem.GetComponent<DialogueSystem>().setAction("door smart open", smartOpen);
-        dialogueSystem.GetComponent<DialogueSystem>().setAction("door close", closeDoor);
-    }
+        if (animator != null)
+        {
+            animator.SetInteger("State", 1);
+        }
 
-    public void openDoor()
-    {
-        Animator anim = door.GetComponent<Animator>();
-        anim.SetBool("isOpen", true);
+        ShowCursor();
+
+        dialogueSystem.SetActive(true);
+
+        dialogueSystem.GetComponent<DialogueSystem>().loadDialogue(currentDialogue);
+        dialogueSystem.GetComponent<DialogueSystem>().setAction("dialogue change", changeDlg);
     }
 
     public void changeDlg()
@@ -30,37 +53,9 @@ public class NPCScript : MonoBehaviour
         currentDialogue = nextDialog;
     }
 
-    public void makeSmarter()
+    void ShowCursor()
     {
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().intellect += 1;
-    }
-
-    public void makeStronger()
-    {
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().power += 1;
-    }
-
-    public void kickIn()
-    {
-        if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().power > 1)
-        {
-            Animator anim = door.GetComponent<Animator>();
-            anim.SetTrigger("strong");
-        }
-    }
-
-    public void smartOpen()
-    {
-        if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().intellect > 1)
-        {
-            Animator anim = door.GetComponent<Animator>();
-            anim.SetTrigger("smart");
-        }
-    }
-
-    public void closeDoor()
-    {
-        Animator anim = door.GetComponent<Animator>();
-        anim.SetBool("isOpen", false);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 }

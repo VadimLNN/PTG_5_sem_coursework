@@ -94,6 +94,8 @@ public class DialogueSystem : MonoBehaviour
     public void dialogueEnd()
     {
         dialogueWindow.SetActive(false);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void setAction(string name, action act)
